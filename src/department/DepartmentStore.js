@@ -83,12 +83,13 @@ const DepartmentStore = types
     }),
     removeDepartment: flow(function*(department) {
       try {
-        yield deleteDepartment(department);
-        /*
-          const index = self.departments.findIndex(d => d.id === department.id);
-          self.departments.splice(index, 1);
-         */
-        destroy(department); // no need to splice.
+        yield deleteDepartment();
+        destroy(department);
+
+        // yield deleteDepartment(department);
+        // destroy(department); // no need to splice.
+        // const index = self.departments.findIndex(d => d.id === department.id);
+        // self.departments.splice(index, 1);
       } catch (e) {
         self.error = e.message;
       }

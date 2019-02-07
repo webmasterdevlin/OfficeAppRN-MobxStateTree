@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, FlatList } from "react-native";
+import { StyleSheet, FlatList, Alert } from "react-native";
 import {
   Container,
   Header,
@@ -15,25 +15,12 @@ import {
   CardItem,
   Body,
   Left,
-  Right
+  Right,
+  SwipeRow
 } from "native-base";
 
 import { inject, observer } from "mobx-react";
 import DepartmentStore from "./DepartmentStore";
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 40,
-    padding: 20
-  },
-  cell: {
-    backgroundColor: "yellow"
-  },
-  footer: {
-    backgroundColor: "crimson"
-  }
-});
 
 class DepartmentList extends Component {
   state = {
@@ -49,6 +36,28 @@ class DepartmentList extends Component {
     }
   };
 
+  deleteDepartment = department => {
+    Alert.alert(
+      "Deleting Department",
+      "Are you sure you want to delete this department?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.warn("Cancel Pressed"),
+          style: "cancel"
+        },
+        {
+          text: "Yes",
+          onPress: () => {
+            console.warn("Yes Pressed");
+            alert("Deleted: ", department.name);
+            this.props.DepartmentStore.removeDepartment(department);
+          }
+        }
+      ]
+    );
+  };
+
   async componentDidMount() {
     const { DepartmentStore } = this.props;
     DepartmentStore.loadDepartments();
@@ -56,23 +65,36 @@ class DepartmentList extends Component {
 
   render() {
     const { DepartmentStore } = this.props;
-    console.log(DepartmentStore.allDepartments);
     return (
       <Container>
-        <Content>
+        <Content scrollEnabled={true}>
           {DepartmentStore.allDepartments.map(d => (
-            <ListItem>
-              <Left>
-                <Text>{d.name}</Text>
-              </Left>
-              <Body>
-                <Text>{d.description}</Text>
-                <Text note>{d.head}</Text>
-              </Body>
-              <Right>
-                <Icon name="arrow-forward" />
-              </Right>
-            </ListItem>
+            <SwipeRow
+              key={d.id}
+              leftOpenValue={75}
+              rightOpenValue={-75}
+              left={
+                <Button success onPress={() => alert(`Edit: ${d.name}`)}>
+                  <Icon active name="create" />
+                </Button>
+              }
+              body={
+                <View style={styles.cell}>
+                  <View>
+                    <Text>{d.name}</Text>
+                    <Text note>{d.description}</Text>
+                  </View>
+                  <View style={styles.cell}>
+                    <Text>{d.head}</Text>
+                  </View>
+                </View>
+              }
+              right={
+                <Button danger onPress={() => this.deleteDepartment(d)}>
+                  <Icon active name="trash" />
+                </Button>
+              }
+            />
           ))}
         </Content>
         <Footer style={styles.footer} />
@@ -83,13 +105,21 @@ class DepartmentList extends Component {
 
 export default inject("DepartmentStore")(observer(DepartmentList));
 
-{
-  /*
-<Card>
-  <CardItem>
-    <Body>
-    <Text>{d.name}</Text>
-    </Body>
-  </CardItem>
-</Card>*/
-}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 40,
+    padding: 20
+  },
+  cell: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    marginLeft: 10,
+    marginRight: 10
+  },
+  footer: {
+    backgroundColor: "indigo"
+  }
+});

@@ -9,7 +9,7 @@ const MainNavigator = createStackNavigator({
       title: "App",
       headerTintColor: "white",
       headerStyle: {
-        backgroundColor: "crimson"
+        backgroundColor: "indigo"
       }
     })
   },
@@ -19,7 +19,7 @@ const MainNavigator = createStackNavigator({
       title: "List",
       headerTintColor: "white",
       headerStyle: {
-        backgroundColor: "crimson"
+        backgroundColor: "indigo"
       }
     })
   }

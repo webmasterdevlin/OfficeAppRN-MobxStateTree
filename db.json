@@ -1,0 +1,39 @@
+{
+  "departments": [
+    {
+      "name": "HR",
+      "description": "Human Resource",
+      "head": "Sakura Chan",
+      "code": "32kn",
+      "id": "da8f9h331"
+    },
+    {
+      "name": "ACCT",
+      "description": "Accounting",
+      "head": "Naruto Uzumaki",
+      "code": "32kn",
+      "id": "r3289fhw"
+    },
+    {
+      "name": "Clinic",
+      "description": "Clinic",
+      "head": "Sasuke Uchija",
+      "code": "oa003",
+      "id": "sd89cpyh"
+    },
+    {
+      "name": "Controller",
+      "description": "Controller",
+      "head": "Rock Lee",
+      "code": "oa002",
+      "id": "fh89wrg3"
+    },
+    {
+      "name": "DO",
+      "description": "Directors Office",
+      "head": "Michelle Jones",
+      "code": "oa001",
+      "id": "823hds88fg"
+    }
+  ]
+}

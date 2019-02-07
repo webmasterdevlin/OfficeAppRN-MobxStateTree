@@ -37,7 +37,7 @@ export function putDepartment(department) {
 }
 
 export function deleteDepartment(department) {
-  fetch(BaseUrl.departments + `/${department.id}`, {
+  return fetch(BaseUrl.departments + `/${department.id}`, {
     method: "DELETE",
     body: JSON.stringify(department),
     headers: new Headers({

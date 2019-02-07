@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, FlatList, Alert } from "react-native";
+import { StyleSheet, Alert } from "react-native";
 import {
   Container,
   Header,
@@ -33,7 +33,8 @@ class DepartmentList extends Component {
       description: "",
       head: "",
       code: ""
-    }
+    },
+    departments: []
   };
 
   deleteDepartment = department => {
@@ -50,7 +51,6 @@ class DepartmentList extends Component {
           text: "Yes",
           onPress: () => {
             console.warn("Yes Pressed");
-            alert("Deleted: ", department.name);
             this.props.DepartmentStore.removeDepartment(department);
           }
         }

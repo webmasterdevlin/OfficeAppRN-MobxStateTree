@@ -49,7 +49,6 @@ const DepartmentStore = types
         yield getDepartments().then(res => {
           departments = res;
         });
-        console.log("loadDepartments: ", toJS(departments));
         applySnapshot(self.departments, departments);
       } catch (e) {
         self.error = e.message;
@@ -83,11 +82,9 @@ const DepartmentStore = types
     }),
     removeDepartment: flow(function*(department) {
       try {
-        yield deleteDepartment();
-        destroy(department);
+        yield deleteDepartment(department);
+        destroy(department); // no need to splice.
 
-        // yield deleteDepartment(department);
-        // destroy(department); // no need to splice.
         // const index = self.departments.findIndex(d => d.id === department.id);
         // self.departments.splice(index, 1);
       } catch (e) {

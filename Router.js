@@ -7,7 +7,7 @@ const MainNavigator = createStackNavigator({
     screen: App,
     navigationOptions: () => ({
       title: "App",
-      headerTintColor: "white",
+      headerTintColor: "#F4F3EE",
       headerStyle: {
         backgroundColor: "indigo"
       }
@@ -17,7 +17,7 @@ const MainNavigator = createStackNavigator({
     screen: DepartmentList,
     navigationOptions: () => ({
       title: "List",
-      headerTintColor: "white",
+      headerTintColor: "#F4F3EE",
       headerStyle: {
         backgroundColor: "indigo"
       }

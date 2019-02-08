@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import DepartmentStore from "./src/department/DepartmentStore";
-import { Provider } from "mobx-react";
 import DepartmentList from "./src/department/DepartmentList";
+
+import { Provider } from "mobx-react";
 const store = {
   DepartmentStore
 };

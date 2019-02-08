@@ -37,22 +37,23 @@ class DepartmentList extends Component {
     departments: []
   };
 
-  deleteDepartment = department => {
+  handleEditDepartment = id => {};
+
+  handleDeleteDepartment = department => {
     Alert.alert(
       "Deleting Department",
       "Are you sure you want to delete this department?",
       [
         {
           text: "Cancel",
-          onPress: () => console.warn("Cancel Pressed"),
           style: "cancel"
         },
         {
           text: "Yes",
           onPress: () => {
-            console.warn("Yes Pressed");
             this.props.DepartmentStore.removeDepartment(department);
-          }
+          },
+          styles: "destructive"
         }
       ]
     );
@@ -74,7 +75,7 @@ class DepartmentList extends Component {
               leftOpenValue={75}
               rightOpenValue={-75}
               left={
-                <Button success onPress={() => alert(`Edit: ${d.name}`)}>
+                <Button success onPress={() => this.handleEditDepartment(d.id)}>
                   <Icon active name="create" />
                 </Button>
               }
@@ -90,14 +91,18 @@ class DepartmentList extends Component {
                 </View>
               }
               right={
-                <Button danger onPress={() => this.deleteDepartment(d)}>
+                <Button danger onPress={() => this.handleDeleteDepartment(d)}>
                   <Icon active name="trash" />
                 </Button>
               }
             />
           ))}
         </Content>
-        <Footer style={styles.footer} />
+        <Footer style={styles.footer}>
+          <Text style={styles.footerText} note>
+            Total number of departments: {DepartmentStore.allDepartments.length}
+          </Text>
+        </Footer>
       </Container>
     );
   }
@@ -120,6 +125,10 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   footer: {
-    backgroundColor: "indigo"
+    backgroundColor: "indigo",
+    alignItems: "center"
+  },
+  footerText: {
+    color: "white"
   }
 });

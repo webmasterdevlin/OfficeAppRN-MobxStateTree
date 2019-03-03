@@ -4,6 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "xr": "react-native run-ios --simulator=\"iPhone XR\"",
+    "max": "react-native run-ios --simulator=\"iPhone XS Max\"",
+    "droid": "react-native run-android",
     "test": "jest",
     "backend": "json-server --watch db.json --port 5000"
   },

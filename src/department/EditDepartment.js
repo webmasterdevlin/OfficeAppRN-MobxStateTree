@@ -45,13 +45,24 @@ class EditDepartment extends Component {
 
   async componentDidMount() {
     await DepartmentStore.loadDepartment(this.props.navigation.getParam("id"));
+    const department = DepartmentStore.selectedDepartment;
+    this.setState({ department });
   }
 
-  handleOnChangeText = () => {};
+  handleOnChangeText = (key, val) => {
+    let department = { ...this.state.department };
+    department[key] = val;
+    this.setState({ department });
+  };
 
-  handleSubmit = () => {};
+  handleSubmit = async () => {
+    await DepartmentStore.updateDepartment(this.state.department);
+    this.props.navigation.goBack();
+  };
 
-  handleGoBack = () => {};
+  handleGoBack = () => {
+    this.props.navigation.goBack();
+  };
 
   _loadDepartment = () => {};
 
@@ -67,21 +78,50 @@ class EditDepartment extends Component {
         <Content>
           <Form>
             <Item>
-              <Input placeholder={name} />
+              <Input
+                placeholder={name}
+                onChangeText={text => this.handleOnChangeText("name", text)}
+              />
             </Item>
             <Item>
-              <Input placeholder={description} />
+              <Input
+                placeholder={description}
+                onChangeText={text =>
+                  this.handleOnChangeText("description", text)
+                }
+              />
             </Item>
             <Item>
-              <Input placeholder={head} />
+              <Input
+                placeholder={head}
+                onChangeText={text => this.handleOnChangeText("head", text)}
+              />
             </Item>
             <Item>
-              <Input placeholder={code} />
+              <Input
+                placeholder={code}
+                onChangeText={text => this.handleOnChangeText("code", text)}
+              />
             </Item>
-            <Button>
+            <Button
+              full
+              warning
+              rounded
+              style={{ margin: 20 }}
+              onPress={() => this.handleSubmit()}
+            >
               <Text>Update</Text>
             </Button>
-            <Button>
+            <Button
+              full
+              warning
+              rounded
+              bordered
+              style={{ margin: 20 }}
+              onPress={() => {
+                this.handleGoBack();
+              }}
+            >
               <Text>Back</Text>
             </Button>
           </Form>

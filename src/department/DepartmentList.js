@@ -8,7 +8,9 @@ import {
   Text,
   Button,
   Icon,
-  SwipeRow
+  SwipeRow,
+  Fab,
+  Form
 } from "native-base";
 
 import { inject, observer } from "mobx-react";
@@ -90,6 +92,16 @@ class DepartmentList extends Component {
             />
           ))}
         </Content>
+
+        <View style={{ flex: 0.2 }}>
+          <Fab
+            position="bottomRight"
+            onPress={() => this.props.navigation.navigate("newDepartment")}
+          >
+            <Icon name="star" />
+          </Fab>
+        </View>
+
         <Footer style={styles.footer}>
           <Text style={styles.footerText} note>
             Total number of departments: {DepartmentStore.allDepartments.length}

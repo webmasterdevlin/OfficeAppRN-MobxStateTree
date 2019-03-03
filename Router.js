@@ -2,6 +2,7 @@ import { createAppContainer, createStackNavigator } from "react-navigation";
 import App from "./src/App";
 import DepartmentList from "./src/department/DepartmentList";
 import EditDepartment from "./src/department/EditDepartment";
+import NewDepartment from "./src/department/NewDepartment";
 
 const MainNavigator = createStackNavigator({
   router: {
@@ -23,6 +24,17 @@ const MainNavigator = createStackNavigator({
         backgroundColor: "indigo"
       },
       gesturesEnabled: false
+    })
+  },
+  newDepartment: {
+    screen: NewDepartment,
+    navigationOptions: () => ({
+      title: "New",
+      headerTintColor: "#F4F3EE",
+      headerLeft: null,
+      headerStyle: {
+        backgroundColor: "indigo"
+      }
     })
   },
   editDepartment: {

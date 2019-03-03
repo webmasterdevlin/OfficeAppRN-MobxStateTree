@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet } from "react-native";
+
 import {
   Container,
   Footer,
@@ -7,12 +7,14 @@ import {
   Form,
   Input,
   Item,
-  Button,
   Icon,
+  Button,
   Text
 } from "native-base";
-import DepartmentStore from "./DepartmentStore";
+import { StyleSheet } from "react-native";
+
 import { inject, observer } from "mobx-react";
+import DepartmentStore from "./DepartmentStore";
 
 const styles = StyleSheet.create({
   container: {
@@ -31,7 +33,7 @@ const styles = StyleSheet.create({
   }
 });
 
-class EditDepartment extends Component {
+class NewDepartment extends Component {
   state = {
     department: {
       id: "",
@@ -39,16 +41,8 @@ class EditDepartment extends Component {
       description: "",
       head: "",
       code: ""
-    },
-    sent: false,
-    error: ""
+    }
   };
-
-  async componentDidMount() {
-    await DepartmentStore.loadDepartment(this.props.navigation.getParam("id"));
-    const department = DepartmentStore.selectedDepartment;
-    this.setState({ department });
-  }
 
   handleOnChangeText = (key, val) => {
     let department = { ...this.state.department };
@@ -57,8 +51,13 @@ class EditDepartment extends Component {
   };
 
   handleSubmit = async () => {
-    await DepartmentStore.updateDepartment(this.state.department);
-    this.props.navigation.goBack();
+    const { name, code, description, head } = this.state.department;
+    if (!name | !code | !description || !head) {
+      alert("Please fill out the whole form");
+    } else {
+      await DepartmentStore.addDepartment(this.state.department);
+      this.props.navigation.goBack();
+    }
   };
 
   handleGoBack = () => {
@@ -66,25 +65,19 @@ class EditDepartment extends Component {
   };
 
   render() {
-    const {
-      name,
-      description,
-      head,
-      code
-    } = DepartmentStore.selectedDepartment;
     return (
       <Container>
         <Content>
           <Form>
             <Item>
               <Input
-                placeholder={name}
+                placeholder="name"
                 onChangeText={text => this.handleOnChangeText("name", text)}
               />
             </Item>
             <Item>
               <Input
-                placeholder={description}
+                placeholder="description"
                 onChangeText={text =>
                   this.handleOnChangeText("description", text)
                 }
@@ -92,35 +85,33 @@ class EditDepartment extends Component {
             </Item>
             <Item>
               <Input
-                placeholder={head}
+                placeholder="head"
                 onChangeText={text => this.handleOnChangeText("head", text)}
               />
             </Item>
             <Item>
               <Input
-                placeholder={code}
+                placeholder="code"
                 onChangeText={text => this.handleOnChangeText("code", text)}
               />
             </Item>
             <Button
               full
-              warning
+              success
               rounded
               style={{ margin: 20 }}
               onPress={() => this.handleSubmit()}
             >
-              <Text>Update</Text>
+              <Text>Add</Text>
             </Button>
             <Button
               iconLeft
               full
-              warning
+              success
               rounded
               bordered
               style={{ margin: 20 }}
-              onPress={() => {
-                this.handleGoBack();
-              }}
+              onPress={() => this.handleGoBack()}
             >
               <Icon name="arrow-back" />
               <Text>Back</Text>
@@ -133,4 +124,4 @@ class EditDepartment extends Component {
   }
 }
 
-export default inject("DepartmentStore")(observer(EditDepartment));
+export default inject("DepartmentStore")(observer(NewDepartment));

@@ -54,6 +54,7 @@ const DepartmentStore = types
         self.error = e.message;
       }
     }),
+
     loadDepartment: flow(function*(id) {
       try {
         let department = {};
@@ -63,14 +64,16 @@ const DepartmentStore = types
         self.error = e.message;
       }
     }),
+
     addDepartment: flow(function*(department) {
       try {
         yield postDepartment(department);
-        self.departments.unshift(department);
+        self.departments = self.departments.concat(department);
       } catch (e) {
         self.error = e.message;
       }
     }),
+
     updateDepartment: flow(function*(department) {
       try {
         yield putDepartment(department);
@@ -80,6 +83,7 @@ const DepartmentStore = types
         self.error = e.message;
       }
     }),
+
     removeDepartment: flow(function*(department) {
       try {
         yield deleteDepartment(department);

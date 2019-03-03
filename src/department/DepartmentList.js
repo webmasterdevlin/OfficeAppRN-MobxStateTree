@@ -2,20 +2,12 @@ import React, { Component } from "react";
 import { StyleSheet, Alert } from "react-native";
 import {
   Container,
-  Header,
   Footer,
   Content,
   View,
   Text,
-  List,
-  ListItem,
   Button,
   Icon,
-  Card,
-  CardItem,
-  Body,
-  Left,
-  Right,
   SwipeRow
 } from "native-base";
 
@@ -37,7 +29,9 @@ class DepartmentList extends Component {
     departments: []
   };
 
-  handleEditDepartment = id => {};
+  handleEditDepartment = id => {
+    this.props.navigation.navigate("editDepartment", { id });
+  };
 
   handleDeleteDepartment = department => {
     Alert.alert(
@@ -51,7 +45,7 @@ class DepartmentList extends Component {
         {
           text: "Yes",
           onPress: () => {
-            this.props.DepartmentStore.removeDepartment(department);
+            DepartmentStore.removeDepartment(department);
           },
           styles: "destructive"
         }
@@ -59,13 +53,11 @@ class DepartmentList extends Component {
     );
   };
 
-  async componentDidMount() {
-    const { DepartmentStore } = this.props;
+  componentDidMount() {
     DepartmentStore.loadDepartments();
   }
 
   render() {
-    const { DepartmentStore } = this.props;
     return (
       <Container>
         <Content scrollEnabled={true}>

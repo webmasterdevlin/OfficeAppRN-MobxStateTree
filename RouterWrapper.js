@@ -1,6 +1,7 @@
 import { Provider } from "mobx-react";
 import React from "react";
 import Router from "./Router";
+
 import DepartmentStore from "./src/department/DepartmentStore";
 const store = {
   DepartmentStore

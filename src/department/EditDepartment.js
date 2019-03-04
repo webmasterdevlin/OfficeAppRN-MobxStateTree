@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     paddingTop: 40
   },
   footer: {
-    backgroundColor: "indigo",
+    backgroundColor: "#9C27B0",
     alignItems: "center"
   },
   footerText: {

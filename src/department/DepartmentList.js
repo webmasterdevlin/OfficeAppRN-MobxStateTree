@@ -9,8 +9,7 @@ import {
   Button,
   Icon,
   SwipeRow,
-  Fab,
-  Form
+  Fab
 } from "native-base";
 
 import { inject, observer } from "mobx-react";
@@ -18,18 +17,18 @@ import DepartmentStore from "./DepartmentStore";
 
 class DepartmentList extends Component {
   state = {
-    error: "",
-    fetching: "",
-    isShowNewItemForm: false,
     department: {
       id: "",
       name: "",
       description: "",
       head: "",
       code: ""
-    },
-    departments: []
+    }
   };
+
+  componentDidMount() {
+    DepartmentStore.loadDepartments();
+  }
 
   handleEditDepartment = id => {
     this.props.navigation.navigate("editDepartment", { id });
@@ -54,10 +53,6 @@ class DepartmentList extends Component {
       ]
     );
   };
-
-  componentDidMount() {
-    DepartmentStore.loadDepartments();
-  }
 
   render() {
     return (
@@ -97,6 +92,7 @@ class DepartmentList extends Component {
           <Fab
             position="bottomRight"
             onPress={() => this.props.navigation.navigate("newDepartment")}
+            style={{ backgroundColor: "#9C27B0" }}
           >
             <Icon name="star" />
           </Fab>
@@ -129,7 +125,7 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   footer: {
-    backgroundColor: "indigo",
+    backgroundColor: "#9C27B0",
     alignItems: "center"
   },
   footerText: {

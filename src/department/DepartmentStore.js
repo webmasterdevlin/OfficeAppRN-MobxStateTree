@@ -7,7 +7,6 @@ import {
   postDepartment,
   putDepartment
 } from "./DepartmentService";
-import { toJS } from "mobx";
 
 const Department = types.model("Department", {
   id: types.identifier,

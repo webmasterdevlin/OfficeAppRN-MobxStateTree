@@ -25,8 +25,6 @@ export function postDepartment(department) {
 }
 
 export function putDepartment(department) {
-  console.warn(department.id);
-
   return fetch(BaseUrl.departments + `/${department.id}`, {
     method: "PUT",
     body: JSON.stringify(department),

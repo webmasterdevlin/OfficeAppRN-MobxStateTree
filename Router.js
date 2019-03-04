@@ -1,27 +1,17 @@
 import { createAppContainer, createStackNavigator } from "react-navigation";
-import App from "./src/App";
+
 import DepartmentList from "./src/department/DepartmentList";
 import EditDepartment from "./src/department/EditDepartment";
 import NewDepartment from "./src/department/NewDepartment";
 
 const MainNavigator = createStackNavigator({
-  router: {
-    screen: App,
-    navigationOptions: () => ({
-      title: "App",
-      headerTintColor: "#F4F3EE",
-      headerStyle: {
-        backgroundColor: "indigo"
-      }
-    })
-  },
   departmentList: {
     screen: DepartmentList,
     navigationOptions: () => ({
-      title: "List",
+      title: "React Native - Mobx State Tree",
       headerTintColor: "#F4F3EE",
       headerStyle: {
-        backgroundColor: "indigo"
+        backgroundColor: "#9C27B0"
       },
       gesturesEnabled: false
     })
@@ -33,7 +23,7 @@ const MainNavigator = createStackNavigator({
       headerTintColor: "#F4F3EE",
       headerLeft: null,
       headerStyle: {
-        backgroundColor: "indigo"
+        backgroundColor: "#9C27B0"
       }
     })
   },
@@ -43,7 +33,7 @@ const MainNavigator = createStackNavigator({
       title: "Edit",
       headerTintColor: "#F4F3EE",
       headerStyle: {
-        backgroundColor: "indigo"
+        backgroundColor: "#9C27B0"
       },
       gesturesEnabled: false
     })

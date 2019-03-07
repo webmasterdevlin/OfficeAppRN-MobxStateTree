@@ -16,16 +16,6 @@ import { inject, observer } from "mobx-react";
 import DepartmentStore from "./DepartmentStore";
 
 class DepartmentList extends Component {
-  state = {
-    department: {
-      id: "",
-      name: "",
-      description: "",
-      head: "",
-      code: ""
-    }
-  };
-
   componentDidMount() {
     DepartmentStore.loadDepartments();
   }

@@ -43,12 +43,7 @@ const DepartmentStore = types
   .actions(self => ({
     loadDepartments: flow(function*() {
       try {
-        let departments = [];
-
-        yield getDepartments().then(res => {
-          departments = res;
-        });
-        applySnapshot(self.departments, departments);
+        applySnapshot(self.departments, yield getDepartments());
       } catch (e) {
         self.error = e.message;
       }
@@ -56,9 +51,7 @@ const DepartmentStore = types
 
     loadDepartment: flow(function*(id) {
       try {
-        let department = {};
-        yield getDepartment(id).then(res => (department = res));
-        self.department = department;
+        self.department = yield getDepartment(id);
       } catch (e) {
         self.error = e.message;
       }
@@ -88,8 +81,8 @@ const DepartmentStore = types
         yield deleteDepartment(department);
         destroy(department); // no need to splice.
 
-        // const index = self.departments.findIndex(d => d.id === department.id);
-        // self.departments.splice(index, 1);
+        /* const index = self.departments.findIndex(d => d.id === department.id);
+         self.departments.splice(index, 1);*/
       } catch (e) {
         self.error = e.message;
       }

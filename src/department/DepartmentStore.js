@@ -7,25 +7,14 @@ import {
   postDepartment,
   putDepartment
 } from "./DepartmentService";
+import {DepartmentProperties, DepartmentSnapshot } from "../models/DepartmentProperties";
 
-const Department = types.model("Department", {
-  id: types.identifier,
-  name: types.string,
-  description: types.string,
-  head: types.string,
-  code: types.string
-});
+const Department = types.model("Department", DepartmentProperties);
 
 const DepartmentStore = types
   .model("DepartmentStore", {
     departments: types.optional(types.array(Department), []),
-    department: types.model("Department", {
-      id: types.identifier,
-      name: types.string,
-      description: types.string,
-      head: types.string,
-      code: types.string
-    }),
+    department: types.model("Department", DepartmentProperties),
     error: types.string,
     fetching: types.boolean
   })
@@ -90,13 +79,7 @@ const DepartmentStore = types
   }))
   .create({
     departments: [],
-    department: {
-      id: "",
-      name: "",
-      description: "",
-      head: "",
-      code: ""
-    },
+    department: DepartmentSnapshot,
     error: "",
     fetching: false
   });
